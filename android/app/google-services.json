@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "608055589041",
+    "firebase_url": "https://vexa-eleicoes-default-rtdb.firebaseio.com",
+    "project_id": "vexa-eleicoes",
+    "storage_bucket": "vexa-eleicoes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608055589041:android:ff360644486dff094a0a90",
+        "android_client_info": {
+          "package_name": "com.diegodaniel.vexa_eleicoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608055589041-1kgr7ju4a7pt4e4jvqeul3aof9vguimq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK1Ubrt_3T4KhA5bybCikdc8gfcsDfdZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608055589041-1kgr7ju4a7pt4e4jvqeul3aof9vguimq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
