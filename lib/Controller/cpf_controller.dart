@@ -12,7 +12,7 @@ class CPFController {
     }
     int resto = (soma * 10) % 11;
 
-    if (resto == int.parse(cpfConvertido[9])) {
+    if ((resto == 10 ? 0 : resto) == int.parse(cpfConvertido[9])) {
       soma = 0;
       controllerConta = 11;
       for (var i = 0; i < 10; i++) {
@@ -20,7 +20,7 @@ class CPFController {
         controllerConta--;
       }
       int resto = (soma * 10) % 11;
-      retorno = resto == int.parse(cpfConvertido[10]);
+      retorno = (resto == 10 ? 0 : resto) == int.parse(cpfConvertido[10]);
     }
 
     return retorno;

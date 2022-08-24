@@ -2,12 +2,14 @@
 import 'dart:async';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:vexa_eleicoes/Controller/navigator_controller.dart';
 import 'package:vexa_eleicoes/Models/candidatos_context.dart';
 import 'package:vexa_eleicoes/Views/cpf_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  // const HomeScreen({Key? key}) : super(key: key);
+  // ignore: prefer_typing_uninitialized_variables
   final votou;
   const HomeScreen(this.votou, {Key? key}) : super(key: key);
   @override
@@ -28,9 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
     dialogVote();
   }
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
           shadowColor: Colors.transparent,
@@ -48,27 +52,50 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.share),
+              color: Colors.black,
+              onPressed: () {
+                Share.share('Enquete eleitoral AO VIVO, Participe agora!! https://play.google.com/store/apps/details?id=com.diegodaniel.vexa_eleicoes');
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.info_outline_rounded),
+              color: Colors.black,
+              onPressed: () {
+                AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.INFO,
+                        animType: AnimType.BOTTOMSLIDE,
+                        title: 'Informações',
+                        desc:
+                            '1º Este aplicativo não tem vinculação nenhuma com qualquer instituição.\n2º Dados totalmente criptografados.\n3º não compartilhamos os dados gravados com nenhuma instituição.\n4º Aplicativo para fins educational.\n5º Números dos candidatos totalmente fictício  \n6º Para dúvidas mande um email para vexaltda@gmail.com',
+                        btnOkOnPress: () {},
+                        headerAnimationLoop: false)
+                    .show();
+              },
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 30.0),
               child: IconButton(
-                icon: const Icon(Icons.info),
-                color: Colors.black,
+                icon: const Icon(
+                  Icons.warning_amber_rounded,
+                  size: 27,
+                ),
+                color: Colors.red,
                 onPressed: () {
                   AwesomeDialog(
                           context: context,
-                          dialogType: DialogType.INFO,
+                          dialogType: DialogType.WARNING,
                           animType: AnimType.BOTTOMSLIDE,
-                          title: 'Informações',
-                          desc:
-                              '1º Este aplicativo não tem vinculação nenhuma com qualquer instituição.\n2º Dados totalmente criptografados.\n3º não compartilhamos os dados gravados com nenhuma instituição.\n4º Aplicativo para fins educational.\n5º Números dos candidatos totalmente fictício  \n6º Para dúvidas mande um email para vexaltda@gmail.com',
-                          // btnCancelOnPress: () {},
+                          title: 'Enquete',
+                          desc: 'ENQUETE NÃO É PESQUISA !! Enquete não possui valor científico e não pode ser confundida com pesquisa eleitoral.',
                           btnOkOnPress: () {},
-                          // btnCancelText: "Ok",
                           headerAnimationLoop: false)
                       .show();
                 },
               ),
-            )
+            ),
           ]),
       body: FutureBuilder<Map>(
         future: CandidatoContext().getCandidatos(),
@@ -90,8 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Container(
                     margin: const EdgeInsets.fromLTRB(0, 7, 0, 6),
                     width: size.width * 0.8,
-                    height: size.height * 0.15,
-                    // color: Colors.blue,
+                    height: size.height * 0.12,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
@@ -102,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               5.0,
                             ),
                             blurRadius: 6.0,
-                            // spreadRadius: 2.0,
                           ), //BoxShadow
                           const BoxShadow(
                             color: Colors.white,
@@ -119,34 +144,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: size.width * 0.2,
-                                    height: size.height * 0.1,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: AssetImage(snapshot.data![numerosCandidatos[index]]["img"] == "null" ? "assets/img/null.png" : "assets/img/${numerosCandidatos[index]}.png"),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: size.height * 0.03,
-                                    width: size.width * 0.18,
-                                    decoration: BoxDecoration(
-                                      // color: HexColor('#A09D7A'),
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                        child: Text(
-                                      ((snapshot.data![numerosCandidatos[index]]["qtdvotos"] / qtdVotosTotais) * 100).toStringAsFixed(2) + "%",
-                                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey[100]),
-                                    )),
-                                  ),
-                                ],
+                              child: Container(
+                                width: size.width * 0.2,
+                                height: size.height * 0.1,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: AssetImage(snapshot.data![numerosCandidatos[index]]["img"] == "null" ? "assets/img/null.png" : "assets/img/${numerosCandidatos[index]}.png"),
+                                      fit: BoxFit.cover),
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -159,7 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(snapshot.data![numerosCandidatos[index]]["nome"], style: TextStyle(fontWeight: FontWeight.bold)),
                                 Text("Nº " + numerosCandidatos[index]),
                                 Text(snapshot.data![numerosCandidatos[index]]["partido"]),
-                                const Text(""),
                                 Text(
                                     snapshot.data![numerosCandidatos[index]]["qtdvotos"].toString() +
                                         " " +
@@ -168,6 +173,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: size.height * 0.03,
+                            width: size.width * 0.18,
+                            decoration: BoxDecoration(
+                              // color: HexColor('#A09D7A'),
+                              color: Colors.black45,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                                child: Text(
+                              ((snapshot.data![numerosCandidatos[index]]["qtdvotos"] / qtdVotosTotais) * 100).toStringAsFixed(2) + "%",
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey[100]),
+                            )),
+                          ),
                         ),
                       ],
                     ),
@@ -222,7 +244,13 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Container(
         alignment: Alignment.bottomRight,
         child: FloatingActionButton.extended(
-          onPressed: () {
+          onPressed: () async {
+            //         Map<Permission, PermissionStatus> statuses = await [
+            //   Permission.bluetooth
+            //   // Permission.,
+            // ].request();
+
+            // print(statuses);
             NavigatorController().navigatorToReturn(context, const CPFScreen());
           },
           backgroundColor: Colors.green,
