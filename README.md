@@ -1,17 +1,33 @@
-# vexa_eleicoes
+# 📱 Vexa Eleições
 
-A new Flutter project.
+> An app monitoring of the 2022 presidential elections in Brazil
 
-## Getting Started
+## Prerequisites
+  • Flutter 3.3.4
 
-This project is a starting point for a Flutter application.
+## 🚀 Usage
 
-A few resources to get you started if this is your first Flutter project:
+Make sure you have [flutter](https://docs.flutter.dev/get-started/install) installed (`3.3.4`)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Just run the following command at the root of your project and answer questions:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# vexa_eleicoes
+```sh
+flutter upgrade
+```
+
+```sh
+flutter pub get
+```
+
+```sh
+flutter run
+```
+
+## Author
+👤 **Diego Daniel**
+- Instagram: [@diegodanie_](https://instagram.com/diegodanie_)
+- Github: [@diegodanielsantana00](https://github.com/diegodanielsantana00)
+
+## 📝 License
+Copyright © 2022 [Diego Daniel](https://github.com/diegodanielsantana00).<br />
+
