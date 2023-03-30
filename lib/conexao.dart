@@ -1,1 +1,1 @@
-const APIRealTime = "https://vexa-eleicoes-default-rtdb.firebaseio.com/";
+const APIRealTime = APIRealTimeAux;
